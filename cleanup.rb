@@ -43,11 +43,14 @@ end
 
 Parallel.each(1..total.to_i, :in_threads=>procs.to_i) do |number|
   gce_server_delete(number)
+end
+
+Parallel.each(1..total.to_i, :in_threads=>procs.to_i) do |number|
   chef_cleanup(number)
 end
 
-puts "\n", "Waiting 90s before destroying disks...", "\n"
-sleep(90)
+puts "\n", "Waiting 120s before destroying disks...", "\n"
+sleep(120)
 
 Parallel.each(1..total.to_i, :in_threads=>procs.to_i) do |number|
   gce_disk_delete(number)
